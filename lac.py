@@ -1,11 +1,12 @@
-
+import mmap
 
 class ArcView:
     def __init__(self, fname : str) -> None:
-        self.bytes = b""
-        with open(fname, "rb") as f:
-            self.bytes = f.read()
-        
+        self.filehandle = open(fname, "r+b")
+        self.bytes = mmap.mmap(self.filehandle.fileno(), 0)
+
+    def __del__(self):
+        self.filehandle.close()
     def ReadByte(self, offset : int) -> int:
         return self.bytes[offset]
     
