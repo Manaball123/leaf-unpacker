@@ -15,6 +15,7 @@ def main():
             if file.endswith(".LAC"):
                 packed_files.append(file)
     for file in packed_files:
+        print(f"\nUnpacking {file}")
         arcview = lac.ArcView(file)
         opener = lac.LacOpener(arcview)
         opener.TryOpen()
